@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#163b38">
+  <meta name="description" content="呼吸器の医学英単語28語を、四択クイズで練習。英語から日本語・日本語から英語、間違えた問題の復習に対応。">
+  <title>呼吸器の英単語 | RESPIRA QUIZ</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="quiz-core.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">メインに移動</a>
+  <div class="page-shell">
+    <header class="site-header">
+      <a id="brand-link" class="brand" href="./" aria-label="RESPIRA QUIZ ホーム">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M18 7v13m4-13v13m-4-6c-4-5-8-2-11 5S3 32 7 33c4 2 11-2 11-7V14Zm4 0c4-5 8-2 11 5s4 13 0 14c-4 2-11-2-11-7V14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>RESPIRA<span class="brand-light"> / QUIZ</span></span>
+      </a>
+      <span class="header-tag">呼吸器 · 28 WORDS</span>
+    </header>
+
+    <main id="main">
+      <section id="home-screen" aria-labelledby="home-title">
+        <div class="hero">
+          <span class="eyebrow"><span class="status-dot"></span> MEDICAL ENGLISH PRACTICE</span>
+          <h1 id="home-title">ひとつずつ、<br><span>呼吸器の英単語。</span></h1>
+          <p class="hero-description">28語を、四択で身につける。<br>間違えた単語は、もう一度。</p>
+          <div class="hero-decoration" aria-hidden="true"><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><svg viewBox="0 0 160 160" fill="none"><path d="M73 28v55m14-55v55M73 54C57 33 42 46 31 72S14 125 31 131c15 8 42-7 42-28V54Zm14 0c16-21 31-8 42 18s17 53 0 59c-15 8-42-7-42-28V54Z" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="m73 82-22 14m36-14 22 14M51 96l-5 18m63-18 5 18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></div>
+        </div>
+
+        <div class="start-card">
+          <div class="card-heading"><span class="step-label">LET'S PRACTICE</span><span class="pill">1回 28問</span></div>
+          <h2>出題モードを選ぶ</h2>
+          <fieldset class="mode-picker">
+            <legend class="sr-only">出題する言語の向き</legend>
+            <label class="mode-option"><input type="radio" name="mode" value="en-ja" checked><span class="mode-content"><span class="mode-title">英語 <span aria-hidden="true">→</span> 日本語</span><span class="mode-example">lung → 肺</span></span><span class="radio-dot" aria-hidden="true"></span></label>
+            <label class="mode-option"><input type="radio" name="mode" value="ja-en"><span class="mode-content"><span class="mode-title">日本語 <span aria-hidden="true">→</span> 英語</span><span class="mode-example">肺 → lung</span></span><span class="radio-dot" aria-hidden="true"></span></label>
+          </fieldset>
+          <button id="start-button" class="button button-primary button-wide">クイズをはじめる <span aria-hidden="true">↗</span></button>
+          <p class="start-caption">順番・選択肢は毎回シャッフル。時間制限はありません。</p>
+        </div>
+        <details class="word-list" id="word-list">
+          <summary><span><span class="book-icon" aria-hidden="true">▤</span> 収録単語をチェック</span><span class="details-count">28語 <span class="details-arrow" aria-hidden="true">＋</span></span></summary>
+          <div id="vocabulary" class="vocabulary"></div>
+          <p class="vocabulary-note">このクイズは提示された単語集の訳に合わせています。cancer は悪性腫瘍の総称、carcinoma は上皮性悪性腫瘍（癌腫）として区別します。</p>
+        </details>
+      </section>
+
+      <section id="quiz-screen" hidden aria-labelledby="question-term">
+        <div class="quiz-toolbar"><button id="quit-button" class="text-button">← ホームに戻る</button><span id="quiz-mode" class="pill"></span></div>
+        <div class="progress-header"><p id="question-counter" class="question-counter"></p><p id="score-counter" class="score-counter"></p></div>
+        <div id="quiz-progress" class="progress-track" role="progressbar" aria-label="回答済みの問題数" aria-valuemin="0" aria-valuemax="28" aria-valuenow="0"><span id="progress-fill"></span></div>
+        <div class="question-card">
+          <div class="question-topline"><span id="question-category" class="eyebrow"></span><span id="review-badge" class="review-badge" hidden>復習モード</span></div>
+          <p id="question-instruction" class="question-instruction"></p>
+          <h1 id="question-term" class="question-term" tabindex="-1"></h1>
+          <p id="question-context" class="question-context" hidden></p>
+          <div id="options" class="options" role="group" aria-labelledby="question-instruction question-term"></div>
+          <div id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"></div>
+          <button id="next-button" class="button button-primary button-wide" hidden>次の問題へ <span aria-hidden="true">→</span></button>
+          <p id="answer-tip" class="answer-tip">答えをひとつ選んでください</p>
+        </div>
+      </section>
+
+      <section id="results-screen" hidden aria-labelledby="results-title">
+        <div class="results-card">
+          <span class="eyebrow">SESSION COMPLETE</span>
+          <h1 id="results-title" tabindex="-1">おつかれさまでした！</h1>
+          <div id="score-ring" class="score-ring"><div><span class="score-label">正解数</span><p><strong id="final-score">0</strong><span id="final-total"> / 28</span></p><span id="final-percent">0%</span></div></div>
+          <h2 id="result-message"></h2>
+          <p id="result-description" class="result-description"></p>
+          <div class="result-actions">
+            <button id="retry-button" class="button button-primary button-wide">間違えた問題だけ復習</button>
+            <button id="restart-button" class="button button-secondary button-wide">28問でもう一度</button>
+            <button id="home-button" class="text-button">出題モードを選び直す</button>
+          </div>
+        </div>
+        <section id="mistakes-section" class="mistakes-section" hidden aria-labelledby="mistakes-title">
+          <div class="section-heading"><h2 id="mistakes-title">ここを、もう一度。</h2><span id="mistakes-count" class="pill"></span></div>
+          <div id="mistakes-list" class="mistakes-list"></div>
+        </section>
+      </section>
+      <noscript><p class="noscript-message">クイズを使うには、ブラウザーの JavaScript を有効にしてください。</p></noscript>
+    </main>
+    <footer class="site-footer"><span>少しずつ、確かな知識に。</span><span>学習用 · 診療判断には使用しないでください</span></footer>
+  </div>
+  <dialog id="quit-dialog" aria-labelledby="quit-title" aria-describedby="quit-description">
+    <h2 id="quit-title">いったん終了しますか？</h2>
+    <p id="quit-description">今回の回答は保存されません。</p>
+    <div class="dialog-actions"><button id="continue-button" class="button button-secondary">続ける</button><button id="confirm-quit-button" class="button button-primary">ホームに戻る</button></div>
+  </dialog>
+</body>
+</html>
